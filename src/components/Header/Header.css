@@ -1,0 +1,378 @@
+/* Header Styles */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 56px;
+  background-color: #0f0f0f;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.menu-button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: none;
+  color: #f1f1f1;
+  cursor: pointer;
+  border-radius: 50%;
+  display: none; /* デスクトップ時は非表示 */
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.menu-button svg {
+  fill: #f1f1f1;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.youtube-logo {
+  width: 90px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.logo span {
+  font-size: 10px;
+  color: #f1f1f1;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 0 1 728px;
+  max-width: 732px;
+  justify-content: center;
+}
+
+.search-container {
+  display: flex;
+  flex: 1;
+  max-width: 540px;
+  position: relative;
+  align-items: center;
+  border-radius: 40px;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.search-container:focus-within {
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid #3ea6ff;
+}
+
+.search-input {
+  flex: 1;
+  height: 40px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 40px 0 0 40px;
+  padding: 0 16px;
+  color: #f1f1f1;
+  font-size: 16px;
+  outline: none;
+  caret-color: #f1f1f1;
+}
+
+.search-input::placeholder {
+  color: #aaaaaa;
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+.search-input:focus {
+  border-color: #3ea6ff;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.search-button {
+  width: 64px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: none;
+  border-radius: 0 40px 40px 0;
+  color: #f1f1f1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.search-button svg {
+  fill: #f1f1f1;
+}
+
+.voice-search {
+  width: 40px;
+  height: 40px;
+  background-color: #000000;
+  border: none;
+  border-radius: 50%;
+  color: #f1f1f1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.voice-search:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.voice-search svg {
+  fill: #f1f1f1;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.create-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: #f1f1f1;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 18px;
+  text-decoration: none;
+}
+
+.create-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.create-button svg {
+  fill: #f1f1f1;
+}
+
+.notification-button,
+.profile-button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: none;
+  color: #f1f1f1;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification-button:hover,
+.profile-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.notification-button svg {
+  fill: #f1f1f1;
+}
+
+.profile-container {
+  position: relative;
+}
+
+.profile-button img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+/* Profile Tooltip Styles */
+.profile-tooltip {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 300px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 32px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  z-index: 1001;
+  margin-top: 8px;
+}
+
+.profile-tooltip-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+}
+
+.close-tooltip-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+  padding: 0;
+}
+
+.profile-tooltip-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.profile-tooltip-info {
+  flex: 1;
+}
+
+.profile-tooltip-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #0f0f0f;
+  margin-bottom: 2px;
+}
+
+.profile-tooltip-handle {
+  font-size: 14px;
+  color: #606060;
+}
+
+.profile-tooltip-divider {
+  height: 1px;
+  background-color: #e5e5e5;
+}
+
+.profile-tooltip-menu {
+  padding: 8px 0;
+}
+
+.profile-tooltip-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  color: #0f0f0f;
+  font-size: 14px;
+  position: relative;
+}
+
+.profile-tooltip-item:hover {
+  background-color: #f2f2f2;
+}
+
+.profile-tooltip-item svg {
+  flex-shrink: 0;
+  color: #606060;
+}
+
+.profile-tooltip-item span {
+  flex: 1;
+}
+
+.profile-tooltip-item .arrow-icon {
+  color: #606060;
+  margin-left: auto;
+}
+
+/* Dark mode styles for tooltip */
+@media (prefers-color-scheme: dark) {
+  .profile-tooltip {
+    background-color: #282828;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .profile-tooltip-name {
+    color: #f1f1f1;
+  }
+
+  .profile-tooltip-handle {
+    color: #aaaaaa;
+  }
+
+  .profile-tooltip-divider {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .profile-tooltip-item {
+    color: #f1f1f1;
+  }
+
+  .profile-tooltip-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .profile-tooltip-item svg {
+    color: #aaaaaa;
+  }
+
+  .profile-tooltip-item .arrow-icon {
+    color: #aaaaaa;
+  }
+}
+
+/* Responsive Design for Header */
+@media (max-width: 792px) {
+  .menu-button {
+    display: flex; /* モバイル時にメニューボタンを表示 */
+  }
+
+  .header-center {
+    max-width: none;
+    flex: 1;
+  }
+
+  .create-button span {
+    display: none;
+  }
+}
+
+@media (max-width: 656px) {
+  .header {
+    padding: 0 8px;
+  }
+
+  .search-container {
+    display: none;
+  }
+
+  .voice-search {
+    display: none;
+  }
+
+  .profile-tooltip {
+    width: 280px;
+    right: -16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-tooltip {
+    width: calc(100vw - 32px);
+    right: -16px;
+  }
+}

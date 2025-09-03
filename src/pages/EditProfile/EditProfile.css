@@ -1,0 +1,276 @@
+/* Edit Profile Container */
+.edit-profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Edit Profile Header */
+.edit-profile-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.edit-profile-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 8px 0;
+}
+
+.edit-profile-subtitle {
+  font-size: 16px;
+  color: #aaa;
+  margin: 0;
+}
+
+/* Edit Profile Form */
+.edit-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.edit-profile-section {
+  width: 100%;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.required {
+  color: #ff4444;
+  font-size: 16px;
+}
+
+/* Avatar Edit Container */
+.avatar-edit-container {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.current-avatar {
+  flex-shrink: 0;
+}
+
+.avatar-preview {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #3f3f3f;
+  transition: border-color 0.2s ease;
+}
+
+.avatar-preview:hover {
+  border-color: #fff;
+}
+
+/* Avatar Drop Zone */
+.avatar-drop-zone {
+  flex: 1;
+  border: 2px dashed #3f3f3f;
+  border-radius: 12px;
+  padding: 32px 24px;
+  text-align: center;
+  background-color: #1a1a1a;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.avatar-drop-zone.drag-over {
+  border-color: #fff;
+  background-color: #2a2a2a;
+}
+
+.drop-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.upload-icon {
+  color: #aaa;
+  margin-bottom: 8px;
+}
+
+.drop-text {
+  font-size: 14px;
+  color: #fff;
+  margin: 0;
+}
+
+.file-select-button {
+  background-color: #3f3f3f;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.file-select-button:hover {
+  background-color: #4f4f4f;
+}
+
+.file-format-text {
+  font-size: 12px;
+  color: #aaa;
+  margin: 0;
+}
+
+.remove-avatar {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: #555;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.remove-avatar:hover {
+  background-color: #666;
+}
+
+/* Username Input */
+.username-input {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: #3f3f3f;
+  border: 1px solid #555;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.username-input:focus {
+  outline: none;
+  border-color: #fff;
+}
+
+.username-input::placeholder {
+  color: #aaa;
+}
+
+.input-counter {
+  text-align: right;
+  font-size: 12px;
+  color: #aaa;
+  margin: 4px 0 0 0;
+}
+
+/* Edit Profile Actions */
+.edit-profile-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.save-button {
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.save-button:hover:not(:disabled) {
+  background-color: #e60000;
+}
+
+.save-button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.cancel-button {
+  background-color: #3f3f3f;
+  color: #fff;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cancel-button:hover {
+  background-color: #4f4f4f;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .edit-profile-container {
+    padding: 16px;
+  }
+
+  .edit-profile-title {
+    font-size: 24px;
+  }
+
+  .avatar-edit-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .avatar-drop-zone {
+    padding: 24px 16px;
+  }
+
+  .edit-profile-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .edit-profile-title {
+    font-size: 20px;
+  }
+
+  .avatar-preview {
+    width: 100px;
+    height: 100px;
+  }
+
+  .drop-content {
+    gap: 8px;
+  }
+
+  .drop-text {
+    font-size: 13px;
+  }
+
+  .section-title {
+    font-size: 16px;
+  }
+}
