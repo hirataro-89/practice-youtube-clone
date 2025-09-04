@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './auth.css';
 import { useState } from 'react';
-import authRepository from '../../modules/auth/auth.repository';
+import { authRepository } from '../../modules/auth/auth.repository';
 
 function Signup() {
   const [name, setName] = useState("");

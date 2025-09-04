@@ -1,7 +1,31 @@
 import { Link } from 'react-router-dom';
 import '../Signup/auth.css';
+import { useState } from 'react';
+import { authRepository } from '../../modules/auth/auth.repository';
 
 function Signin() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleChange = (field: 'email' | 'password') => (e: React.ChangeEvent<HTMLInputElement>) => {
+    switch (field) {
+      case 'email':
+        setEmail(e.target.value);
+        break;
+      case 'password':
+        setPassword(e.target.value);
+        break;
+    }
+  };
+
+  const signin = async () => {
+    if (!email || !password) {
+      return;
+    }
+    const { user, token } = await authRepository.signIn(email, password);
+    console.log(user, token);
+  }
+
   return (
     <div className="signup-container">
       <div className="signup-form-container">
@@ -10,13 +34,13 @@ function Signin() {
 
         <div>
           <div className="form-group">
-            <input type="email" placeholder="Email" required />
+            <input type="email" placeholder="Email" required value={email} onChange={handleChange('email')} />
           </div>
 
           <div className="form-group">
-            <input type="password" placeholder="Password" required />
+            <input type="password" placeholder="Password" required value={password} onChange={handleChange('password')} />
           </div>
-          <button type="submit" className="continue-button">
+          <button type="submit" className="continue-button" onClick={signin} disabled={!email || !password}>
             Continue
           </button>
         </div>

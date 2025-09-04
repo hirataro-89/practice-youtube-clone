@@ -15,6 +15,12 @@ export const authRepository = {
 		const { user, token } = result.data;
 		return { user: new User(user), token };
 	},
+	async signIn(email: string, password: string): Promise<{ user: User; token: string }> {
+		const result = await api.post("/auth/signin", {
+			email,
+			password,
+		});
+		const { user, token } = result.data;
+		return { user: new User(user), token };
+	},
 };
-
-export default authRepository;
