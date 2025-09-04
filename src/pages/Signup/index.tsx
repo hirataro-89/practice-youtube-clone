@@ -1,7 +1,37 @@
 import { Link } from 'react-router-dom';
 import './auth.css';
+import { useState } from 'react';
+import authRepository from '../../modules/auth/auth.repository';
 
 function Signup() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleChange = (field: 'name' | 'email' | 'password') =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      switch (field) {
+        case 'name':
+          setName(e.target.value);
+          break;
+        case 'email':
+          setEmail(e.target.value);
+          break;
+        case 'password':
+          setPassword(e.target.value);
+          break;
+      }
+    };
+
+  const signup = async () => {
+    if (!name || !email || !password) {
+      return;
+    }
+    const { user, token } = await authRepository.signUp(name, email, password);
+    localStorage.setItem('token', token);
+    console.log(user, token);
+  }
+
   return (
     <div className="signup-container">
       <div className="signup-form-container">
@@ -12,17 +42,17 @@ function Signup() {
 
         <div>
           <div className="form-group">
-            <input type="text" placeholder="Full name" required />
+            <input type="text" placeholder="Full name" required value={name} onChange={handleChange('name')} />
           </div>
 
           <div className="form-group">
-            <input type="email" placeholder="Email" required />
+            <input type="email" placeholder="Email" required value={email} onChange={handleChange('email')} />
           </div>
 
           <div className="form-group">
-            <input type="password" placeholder="Password" required />
+            <input type="password" placeholder="Password" required value={password} onChange={handleChange('password')} />
           </div>
-          <button type="submit" className="continue-button">
+          <button type="submit" className="continue-button" onClick={signup} disabled={!name || !email || !password}>
             Continue
           </button>
         </div>
