@@ -1,13 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import './auth.css';
 import { useState } from 'react';
 import { authRepository } from '../../modules/auth/auth.repository';
+import { useAtom } from 'jotai';
+import { currentUserAtom } from '../../modules/auth/current-user.state';
 
 function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
   const handleChange = (field: 'name' | 'email' | 'password') =>
     (e: React.ChangeEvent<HTMLInputElement>) => {
       switch (field) {
@@ -29,7 +31,11 @@ function Signup() {
     }
     const { user, token } = await authRepository.signUp(name, email, password);
     localStorage.setItem('token', token);
-    console.log(user, token);
+    setCurrentUser(user);
+  }
+
+  if(currentUser != null) {
+    return <Navigate to="/" />;
   }
 
   return (

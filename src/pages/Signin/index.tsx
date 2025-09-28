@@ -1,11 +1,14 @@
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import '../Signup/auth.css';
 import { useState } from 'react';
 import { authRepository } from '../../modules/auth/auth.repository';
+import { currentUserAtom } from '../../modules/auth/current-user.state';
+import { useAtom } from 'jotai';
 
 function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
 
   const handleChange = (field: 'email' | 'password') => (e: React.ChangeEvent<HTMLInputElement>) => {
     switch (field) {
@@ -23,7 +26,13 @@ function Signin() {
       return;
     }
     const { user, token } = await authRepository.signIn(email, password);
-    console.log(user, token);
+    localStorage.setItem('token', token);
+    setCurrentUser(user);
+  }
+
+  if(currentUser != null) {
+    // ログインしていたらホームにリダイレクト
+    return <Navigate to="/" />;
   }
 
   return (
