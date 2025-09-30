@@ -3,6 +3,9 @@ import VideoFileUpload from './VideoFileUpload';
 import ThumbnailUpload from './ThumbnailUpload';
 import { useState } from 'react';
 import { videoRepository } from '../../modules/videos/video.repository';
+import { useFlashMessage } from '../../modules/flash-message/flash-message.state';
+import { useNavigate } from 'react-router-dom';
+
 
 function CreateVideo() {
   const [selectedVideo, setSelectedVideo] = useState<File | null>(null);
@@ -10,9 +13,12 @@ function CreateVideo() {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [isPublic, setIsPublic] = useState<boolean>(false);
+  const { showMessage } = useFlashMessage();
+  const navigate = useNavigate();
 
   const createVideo = async () => {
     if (selectedVideo == null || selectedThumbnail == null || !title.trim()) {
+      showMessage("動画、サムネイル画像、タイトルは必須です", "error");
       return;
     }
     try {
@@ -23,8 +29,10 @@ function CreateVideo() {
         description,
         isPublic,
       });
-      console.log(video);
+      showMessage("動画をアップロードしました", "success");
+      navigate(`/video/${video.id}`);
     } catch (error) {
+      showMessage("動画をアップロードできませんでした", "error");
       console.error(error);
     }
 
