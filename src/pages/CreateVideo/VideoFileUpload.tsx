@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useFileUpload } from "../../hooks/useFileUpload";
 
 interface Props {
   selectedFile: File | null;
@@ -6,35 +6,10 @@ interface Props {
 }
 
 function VideoFileUpload({ selectedFile, onFileSelect }: Props) {
-  const [isDragOver, setIsDragOver] = useState(false);
-
-  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    setFile(file);
-  }
-
-  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    setIsDragOver(true);
-  }
-
-  const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    setIsDragOver(false);
-  }
-
-  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    setIsDragOver(false);
-    const file = event.dataTransfer.files?.[0];
-    setFile(file);
-  }
-
-  const setFile = (file?: File) => {
-    if (file != null && file.type.startsWith('video/')) {
-      onFileSelect(file);
-    }
-  }
+  const { isDragOver, handleFileSelect, handleDragOver, handleDragLeave, handleDrop } = useFileUpload({
+    acceptTypes: ['video/'],
+    onFileSelect,
+  });
 
   return (
     <div className="upload-section">
