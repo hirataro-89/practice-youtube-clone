@@ -29,7 +29,7 @@ function Header() {
       </div>
       <div className="header-center">
         <div className="search-container">
-          <input type="text" placeholder="検索" className="search-input" value={keyword} onChange={(e) => setKeyword(e.target.value)} />
+          <input type="text" placeholder="検索" className="search-input" value={keyword || ''} onChange={(e) => setKeyword(e.target.value)} />
           <button className="search-button"
             onClick={() => setQueryParams({
               keyword: keyword ?? '',
