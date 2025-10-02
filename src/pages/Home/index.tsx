@@ -9,17 +9,18 @@ function Home() {
   const [videos, setVideos] = useState<Video[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [queryParams, setQueryParams] = useSearchParams();
+  const keyword = queryParams.get('keyword'); // keywordをクエリパラメーターから取得
   const page = parseInt(queryParams.get('page') || '1'); // 取得する値がstringなのでparseIntで数値に変換
   const [totalPages, setTotalPages] = useState<number | undefined>(undefined);
 
   useEffect(() => {
     fetchVideos();
-  }, [page]);
+  }, [page, keyword]);
 
   const fetchVideos = async () => {
     try {
       setIsLoading(true);
-      const { videos, pagination } = await videoRepository.find({ page, limit: 1 });
+      const { videos, pagination } = await videoRepository.find(keyword, { page, limit: 3 });
       setVideos(videos);
       setTotalPages(pagination.totalPages);
     } catch (error) {
@@ -43,6 +44,7 @@ function Home() {
       <div className="pagination">
         <button className="pagination-btn prev-btn"
           onClick={() => setQueryParams({
+            keyword: keyword ?? '',
             page: (page - 1).toString()
           })}
           disabled={page === 1}>
@@ -53,6 +55,7 @@ function Home() {
         </button>
         <button className="pagination-btn next-btn"
           onClick={() => setQueryParams({
+            keyword: keyword ?? '',
             page: (page + 1).toString()
           })}
           disabled={page === totalPages}>
