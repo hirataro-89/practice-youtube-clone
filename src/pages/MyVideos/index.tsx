@@ -5,12 +5,14 @@ import { videoRepository } from '../../modules/videos/video.repository';
 import { useNavigate } from 'react-router-dom';
 import { useAtomValue } from 'jotai';
 import { currentUserAtom } from '../../modules/auth/current-user.state';
+import { useFlashMessage } from '../../modules/flash-message/flash-message.state';
 
 function MyVideos() {
   const [videos, setVideos] = useState<Video[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const currentUser = useAtomValue(currentUserAtom);
   const navigate = useNavigate();
+  const { showMessage } = useFlashMessage();
 
   useEffect(() => {
     fetchMine();
@@ -24,6 +26,20 @@ function MyVideos() {
       console.error(error);
     } finally {
       setIsLoading(false);
+    }
+  }
+
+  const updateIsPublic = async (id: string, isPublic: boolean) => {
+    try {
+      await videoRepository.updateIsPublic(id, isPublic);
+      setVideos((prevVideos) => prevVideos.map((video) => {
+        if (video.id === id) return new Video({ ...video, isPublic });
+        return video;
+      }))
+      showMessage("公開設定を変更しました", "success");
+    } catch (error) {
+      console.error(error);
+      showMessage("公開設定を変更できませんでした", "error");
     }
   }
 
@@ -97,6 +113,9 @@ function MyVideos() {
                     </div>
                     <select
                       className="visibility-select"
+                      value={video.isPublic ? "公開" : "非公開"}
+                      onChange={(e) => updateIsPublic(video.id, e.target.value === "公開")}
+                      onClick={(e) => e.stopPropagation()}
                     >
                       <option value="公開">公開</option>
                       <option value="非公開">非公開</option>

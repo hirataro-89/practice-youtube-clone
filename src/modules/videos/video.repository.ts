@@ -38,4 +38,9 @@ export const videoRepository = {
 		const result = await api.get("/videos/mine");
 		return result.data.map((video: Video) => new Video(video));
 	},
+
+  async updateIsPublic(id: string, isPublic: boolean): Promise<Video> {
+    const result = await api.put(`/videos/${id}/is-public`, { isPublic});
+    return new Video(result.data);
+  }
 };
