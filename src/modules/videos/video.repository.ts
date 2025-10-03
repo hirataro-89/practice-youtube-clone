@@ -22,7 +22,7 @@ export const videoRepository = {
 	},
 
 	async find(
-    keyword: string | null,
+		keyword: string | null,
 		paginationParams: { page: number; limit: number } = { page: 1, limit: 9 }
 	): Promise<{ videos: Video[]; pagination: Pagination }> {
 		const result = await api.get("/videos", {
@@ -32,5 +32,10 @@ export const videoRepository = {
 			videos: result.data.videos.map((video: Video) => new Video(video)),
 			pagination: result.data.pagination,
 		};
+	},
+
+	async findMine(): Promise<Video[]> {
+		const result = await api.get("/videos/mine");
+		return result.data.map((video: Video) => new Video(video));
 	},
 };
