@@ -43,6 +43,20 @@ function MyVideos() {
     }
   }
 
+  const deleteVideo = async (id: string) => {
+    const confirmMessage = "本当にこの動画を削除しますか？この操作は取り消せません。";
+    if (!window.confirm(confirmMessage)) return;
+
+    try {
+      await videoRepository.delete(id);
+      setVideos((prevVideos) => prevVideos.filter((video) => video.id !== id))
+      showMessage("動画を削除しました", "success");
+    } catch (error) {
+      console.error(error);
+      showMessage("動画を削除できませんでした", "error");
+    }
+  }
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -128,7 +142,11 @@ function MyVideos() {
                   </div>
                 </td>
                 <td className="actions-cell">
-                  <button className="delete-button">削除</button>
+                  <button className="delete-button" onClick={(e) => {
+                    deleteVideo(video.id)
+                    e.stopPropagation()
+                  }
+                  }>削除</button>
                 </td>
               </tr>
             ))}
